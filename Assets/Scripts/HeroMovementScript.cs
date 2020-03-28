@@ -8,7 +8,7 @@ public class HeroMovementScript : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     const float MAX_SPEED = 10;
-    bool isFacesLeft = true;
+    bool isFacesRight = true;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,14 +37,14 @@ public class HeroMovementScript : MonoBehaviour
         }
         animator.SetFloat("Speed", Mathf.Abs(speed));
         rb.velocity = new Vector2(speed * MAX_SPEED, rb.velocity.y);
-        if (speed > 0 && isFacesLeft || speed < 0 && !isFacesLeft)
+        if (speed < 0 && isFacesRight || speed > 0 && !isFacesRight)
         {
             Flip();
         }
     }
     void Flip()
     {
-        isFacesLeft = !isFacesLeft;
+        isFacesRight = !isFacesRight;
         Vector3 localSkale = transform.localScale;
         localSkale.x = -localSkale.x;
         transform.localScale = localSkale;
