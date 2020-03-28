@@ -25,7 +25,16 @@ public class HeroMovementScript : MonoBehaviour
     }
     void Run()
     {
+        animator.SetBool("isRunning", true);
         float speed = Input.GetAxis("Horizontal");
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        {
+            animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
+        }
         animator.SetFloat("Speed", Mathf.Abs(speed));
         rb.velocity = new Vector2(speed * MAX_SPEED, rb.velocity.y);
         if (speed > 0 && isFacesLeft || speed < 0 && !isFacesLeft)
