@@ -63,7 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\HeroAnimation.cs" />
+    <Compile Include="Assets\Scripts\DeathScript.cs" />
     <Compile Include="Assets\Scripts\HeroMovementScript.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/stuff/Homework/Unity/firstgame/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

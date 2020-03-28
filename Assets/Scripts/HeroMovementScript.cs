@@ -19,6 +19,7 @@ public class HeroMovementScript : MonoBehaviour
     void Update()
     {
         Run();
+        RunAnimation();
     }
     private void FixedUpdate()
     {
@@ -48,5 +49,17 @@ public class HeroMovementScript : MonoBehaviour
         Vector3 localSkale = transform.localScale;
         localSkale.x = -localSkale.x;
         transform.localScale = localSkale;
+    }
+
+    void RunAnimation()
+    {
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        {
+            animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
+        }
     }
 }
