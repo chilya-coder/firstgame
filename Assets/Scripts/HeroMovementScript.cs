@@ -21,6 +21,8 @@ public class HeroMovementScript : MonoBehaviour
     {
         Run();
         RunAnimation();
+        Jump();
+        JumpAnimation();
     }
     private void FixedUpdate()
     {
@@ -63,4 +65,21 @@ public class HeroMovementScript : MonoBehaviour
             animator.SetBool("isRunning", false);
         }
     }
+
+    void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(transform.up * 12f, ForceMode2D.Impulse);
+        }
+
+    }
+
+    void JumpAnimation()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetTrigger("jump");
+        }
+    } 
 }
