@@ -8,6 +8,7 @@ public class HeroMovementScript : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     const float MAX_SPEED = 10;
+    bool isGrounded;
     public static bool isFacesRight { get; set; }
     void Start()
     {
@@ -68,7 +69,7 @@ public class HeroMovementScript : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(transform.up * 12f, ForceMode2D.Impulse);
         }
@@ -81,5 +82,20 @@ public class HeroMovementScript : MonoBehaviour
         {
             animator.SetTrigger("jump");
         }
-    } 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground") // проверяем, стоит ли герой на объекте с тегом "Ground"
+        {
+            isGrounded = true; // если да - значит он приземлился
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = false; // нет - значит он еще в полете
+        }
+    }
 }
