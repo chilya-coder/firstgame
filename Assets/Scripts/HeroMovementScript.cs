@@ -24,7 +24,6 @@ public class HeroMovementScript : MonoBehaviour
     void Update()
     {
         Run();
-        RunAnimation();
         Jump();
         JumpAnimation();
         Crawl();
@@ -39,7 +38,7 @@ public class HeroMovementScript : MonoBehaviour
     {
         animator.SetBool("isRunning", true);
         float speed = Input.GetAxis("Horizontal");
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        if (speed != 0)
         {
             animator.SetBool("isRunning", true);
         }
@@ -60,18 +59,6 @@ public class HeroMovementScript : MonoBehaviour
         Vector3 localScale = transform.localScale;
         localScale.x = -localScale.x;
         transform.localScale = localScale;
-    }
-
-    void RunAnimation()
-    {
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
-        {
-            animator.SetBool("isRunning", true);
-        }
-        else
-        {
-            animator.SetBool("isRunning", false);
-        }
     }
 
     void Jump()
@@ -96,8 +83,7 @@ public class HeroMovementScript : MonoBehaviour
 
     void Crawl ()
     {
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
+        if (Input.GetAxis("Vertical") < 0) {
             animator.SetBool("isCrawling", true);
         } else
         {
