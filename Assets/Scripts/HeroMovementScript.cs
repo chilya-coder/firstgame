@@ -27,6 +27,7 @@ public class HeroMovementScript : MonoBehaviour
         RunAnimation();
         Jump();
         JumpAnimation();
+        Crawl();
         ySpeed = (rb.position.y - previosYSpeed) * 100;
         previosYSpeed = rb.position.y;
         animator.SetFloat("ySpeed", ySpeed);
@@ -93,6 +94,16 @@ public class HeroMovementScript : MonoBehaviour
         }
     }
 
+    void Crawl ()
+    {
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            animator.SetBool("isCrawling", true);
+        } else
+        {
+            animator.SetBool("isCrawling", false);
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)//Передается когда входящий коллайдер контактирует с коллайдером данного объекта
     {
         if (collision.gameObject.tag == "Ground") // проверяем, стоит ли герой на объекте с тегом "Ground"
