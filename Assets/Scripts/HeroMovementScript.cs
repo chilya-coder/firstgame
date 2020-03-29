@@ -9,12 +9,15 @@ public class HeroMovementScript : MonoBehaviour
     Animator animator;
     const float MAX_SPEED = 10;
     bool isGrounded;
+    float ySpeed;
+    float previosYSpeed;
     public static bool isFacesRight { get; set; }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         isFacesRight = true;
+        previosYSpeed = 0;
     }
 
     // Update is called once per frame
@@ -24,6 +27,9 @@ public class HeroMovementScript : MonoBehaviour
         RunAnimation();
         Jump();
         JumpAnimation();
+        ySpeed = (rb.position.y - previosYSpeed) * 100;
+        previosYSpeed = rb.position.y;
+        animator.SetFloat("ySpeed", ySpeed);
     }
     private void FixedUpdate()
     {
@@ -40,7 +46,7 @@ public class HeroMovementScript : MonoBehaviour
         {
             animator.SetBool("isRunning", false);
         }
-        animator.SetFloat("Speed", Mathf.Abs(speed));
+        animator.SetFloat("speed", Mathf.Abs(speed));
         rb.velocity = new Vector2(speed * MAX_SPEED, rb.velocity.y);
         if (speed < 0 && isFacesRight || speed > 0 && !isFacesRight)
         {
@@ -78,13 +84,16 @@ public class HeroMovementScript : MonoBehaviour
 
     void JumpAnimation()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!isGrounded)
         {
-            animator.SetTrigger("jump");
+            animator.SetBool("isJumping", true);
+        } else
+        {
+            animator.SetBool("isJumping", false);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)//Передается когда входящий коллайдер контактирует с коллайдером данного объекта
     {
         if (collision.gameObject.tag == "Ground") // проверяем, стоит ли герой на объекте с тегом "Ground"
         {
