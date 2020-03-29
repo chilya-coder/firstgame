@@ -10,15 +10,19 @@ public class DeathScript : MonoBehaviour
     void Start()
     {
         rg = GetComponent<Rigidbody2D>();
-        startPosition = new Vector2(rg.position.x, rg.position.y);
+        startPosition = rg.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (rg.position.y < -5)
+        if (rg.position.y < -10)
         {
             rg.position = startPosition;
+            Vector3 localScale = transform.localScale;
+            localScale.x = -Mathf.Abs(localScale.x);
+            transform.localScale = localScale;
+            HeroMovementScript.isFacesRight = true;
         }
     }
 }

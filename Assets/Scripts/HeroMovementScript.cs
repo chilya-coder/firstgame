@@ -8,11 +8,12 @@ public class HeroMovementScript : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     const float MAX_SPEED = 10;
-    bool isFacesRight = true;
+    public static bool isFacesRight { get; set; }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        isFacesRight = true;
     }
 
     // Update is called once per frame
@@ -46,9 +47,9 @@ public class HeroMovementScript : MonoBehaviour
     void Flip()
     {
         isFacesRight = !isFacesRight;
-        Vector3 localSkale = transform.localScale;
-        localSkale.x = -localSkale.x;
-        transform.localScale = localSkale;
+        Vector3 localScale = transform.localScale;
+        localScale.x = -localScale.x;
+        transform.localScale = localScale;
     }
 
     void RunAnimation()
