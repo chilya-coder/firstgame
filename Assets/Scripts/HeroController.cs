@@ -38,12 +38,10 @@ public class HeroController : MonoBehaviour
     {
         Run();
         Jump();
-        JumpAnimation();
         Crawl();
         ySpeed = (rb.position.y - previosYSpeed) * 100;
         previosYSpeed = rb.position.y;
         animator.SetFloat("ySpeed", ySpeed);
-        animator.SetBool("isCrawling", false);
         if (Input.GetButtonDown("Fire1") && Time.time > canMakeNextHit)
         {
             canMakeNextHit = Time.time + hitRate;
@@ -63,7 +61,6 @@ public class HeroController : MonoBehaviour
     }
     void Run()
     {
-        animator.SetBool("isRunning", true);
         float speed = Input.GetAxis("Horizontal");
         if (speed != 0)
         {
@@ -94,15 +91,11 @@ public class HeroController : MonoBehaviour
         {
             rb.AddForce(transform.up * 12f, ForceMode2D.Impulse);
         }
-
-    }
-
-    void JumpAnimation()
-    {
         if (!isGrounded)
         {
             animator.SetBool("isJumping", true);
-        } else
+        }
+        else
         {
             animator.SetBool("isJumping", false);
         }
@@ -110,11 +103,11 @@ public class HeroController : MonoBehaviour
 
     void Crawl ()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            animator.SetBool("isCrawling", true);
+        if (!Input.GetKey(KeyCode.DownArrow)) {
+            animator.SetBool("isCrawling", false);
         } else
         {
-            animator.SetBool("isCrawling", false);
+            animator.SetBool("isCrawling", true);
         }
     }
     void Hit()
