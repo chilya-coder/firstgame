@@ -142,7 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7874ddb360d3d9b4dbe4dc55ac62145d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hit: {fileID: 0}
+  startPosition: {x: -6.18, y: 0.7}
+  hit: {fileID: 2489910533382874275, guid: d6b1d0edf0a722242ad950dece781293, type: 3}
+  hitRate: 0.5
+  Handle: {fileID: 6723547526285027682, guid: 5966843817d1be74fa1fed0b197f9850, type: 3}
 --- !u!95 &4018768361808752785
 Animator:
   serializedVersion: 3

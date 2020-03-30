@@ -5,18 +5,18 @@ using UnityEngine;
 public class HeroController : MonoBehaviour
 {
     // Start is called before the first frame update
-    Rigidbody2D rb;
-    Animator animator;
-    Vector2 startPosition;
-    const float MAX_SPEED = 10;
-    bool isGrounded;
-    float ySpeed;
-    float previosYSpeed;
+    private Rigidbody2D rb;
+    private Animator animator;
+    public Vector2 startPosition;
+    private const float MAX_SPEED = 10;
+    private bool isGrounded;
+    private float ySpeed;
+    private float previosYSpeed;
     public GameObject hit;
-    Vector2 hitPos;
-    float hitRate = 0.5f;
-    float canMakeNextHit = 0.5f;
-    bool isFacesRight { get; set; }
+    private Vector2 hitPos;
+    public float hitRate = 0.5f;
+    private float canMakeNextHit = 0.5f;
+    private bool isFacesRight { get; set; }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -48,11 +48,15 @@ public class HeroController : MonoBehaviour
         {
             canMakeNextHit = Time.time + hitRate;
             Hit();
+        } else
+        {
+            animator.SetBool("isHitting", false);
         }
         if (rb.position.y < -10)
         {
             Death();
         }
+
     }
     private void FixedUpdate()
     {
@@ -106,7 +110,7 @@ public class HeroController : MonoBehaviour
 
     void Crawl ()
     {
-        if (Input.GetAxis("Vertical") < 0) {
+        if (Input.GetKeyDown(KeyCode.DownArrow)) {
             animator.SetBool("isCrawling", true);
         } else
         {
@@ -115,6 +119,7 @@ public class HeroController : MonoBehaviour
     }
     void Hit()
     {
+        animator.SetBool("isHitting",true);
         hitPos = transform.position;
         if (isFacesRight)
         {
