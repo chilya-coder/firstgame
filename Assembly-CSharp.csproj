@@ -69,6 +69,7 @@
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\EnemyScript.cs" />
+    <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\HeroController.cs" />
     <Compile Include="Assets\Scripts\HitScript.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
